@@ -1,0 +1,74 @@
+@startuml
+
+class ClienteForm {
+  - cpf_cliente: CharField
+  - telefone_cliente: CharField
+  - email_cliente: CharField
+  - cnpj_cliente: CharField
+  - status: ChoiceField
+  - rg_cliente: CharField
+  - validade_cnh: CharField
+  - numero: CharField
+  - estado: ChoiceField
+  - cep: CharField
+
+  + __init__(*args, **kwargs)
+  + clean_cpf_cliente()
+  + clean_cnpj_cliente()
+}
+class Automovel {
+    - placa_automovel: CharField
+    - cor_automovel: CharField
+    - nro_portas_automovel: CharField
+    - tipo_combustivel_automovel: CharField
+    - quilometragem_automovel: FloatField
+    - renavam_automovel: CharField
+    - valor_locacao: FloatField
+    - motor: CharField
+    - marca: CharField
+    - modelo: CharField
+    - ano: PositiveIntegerField
+    - criado_em: DateTimeField
+    - categoria: CharField
+    - modificacado_em: DateTimeField
+    - status: CharField
+    + __str__(): str
+}
+class AutomovelForm {
+  - ano: IntegerField
+  - motor: FloatField
+
+  + __init__(*args, **kwargs)
+}
+
+class LocacaoForm {
+  - data_locacao: CharField
+  - data_devolucao: CharField
+  - valor_locacao: FloatField
+  - valor_diaria: FloatField
+  - cliente: ModelChoiceField
+  - carro: ModelChoiceField
+
+  + __init__(*args, **kwargs)
+}
+
+class EditLocacaoForm {
+  - carro: ModelChoiceField
+
+  + __init__(*args, **kwargs)
+}
+
+class FimLocacaoForm {
+  - quilometragem: FloatField
+  - data_devolucao_f: DateField
+  - valor_adicional: FloatField
+  - valor_locacao_f: CharField
+
+  + __init__(*args, **kwargs)
+}
+
+ClienteForm "1" --> "1" Cliente
+AutomovelForm "1" --> "1" Automovel
+LocacaoForm "1" --> "1" Locacao
+EditLocacaoForm "1" --> "1" Locacao
+FimLocacaoForm --> Locacao
